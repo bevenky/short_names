@@ -57,7 +57,7 @@ def show_domains(alphabet):
 def set_data():
     global secret_key
     global domains
-    if data in request.form and auth in request.form:
+    if 'data' in request.form and 'auth' in request.form:
         data = request.form['data']
         auth = request.form['auth']
         if auth == secret_key:

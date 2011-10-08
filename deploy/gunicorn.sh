@@ -7,7 +7,7 @@ LOGFILE=/var/log/gunicorn_sn.log
 LOGLEVEL=debug
 NUM_WORKERS=1
 
-URL=184.75.242.142
+URL=184.75.242.142:8080
 
 PID=/var/run/gunicorn_sn.pid
 
@@ -21,4 +21,4 @@ rm -f $PID
 
 cd $PROJECT_PATH
 source $VENV/activate
-exec $VENV/gunicorn -b $URL -w $NUM_WORKERS --user=$USER --group=$GROUP --pid=$PID --log-level=$LOGLEVEL --log-file=$LOGFILE  2>>$LOGFILE short_names:app
+exec $VENV/gunicorn -b $URL -w $NUM_WORKERS --user=$USER --group=$GROUP --pid=$PID --log-level=$LOGLEVEL --log-file=$LOGFILE  2>>$LOGFILE app:app
