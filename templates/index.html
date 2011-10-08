@@ -1,0 +1,62 @@
+<html>
+<head>
+    <link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.3.0/bootstrap.min.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>xxxxx - awesome five letter domains</title>
+</head>
+<body style="padding-top: 40px;">
+    <!-- Top bar -->
+    <div class="topbar">
+    <div class="topbar-inner">
+        <div class="container">
+            <a class="brand" href="http://www.xxxxx.com">xxxxx</a>
+        </div>
+    </div>
+    </div>
+    <!-- Some angrezi -->
+    <div class="container" style="padding-top: 40px;">
+        <section id="header">
+        <div class="page-header">
+        <h1>awesome five letter domains <small> (updated every sunday)</small></h1>
+        </div>
+        </section>
+    </div>
+
+    <!-- Pagination -->
+    <div class="container">
+        <div class="pagination" style="text-align: center;">
+            <ul>
+            {% for char in char_set %}
+                
+                <li 
+                {% if current == char %}
+                    class="active"
+                {% endif %}
+                ><a href="/{{ char }}/">{{ char }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="container">
+        <div class="row" style="padding-top: 10px;">
+        {% for domain in domains %}
+            <div class="span4">
+                <div class="alert-message block-message warning">
+                    <h2 style="text-align:center;">{{ domain }}</h2>
+                </div>
+            </div>
+        {% endfor %}
+
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>built in 2 hours by <a href="http://twitter.com/adsahay">@adsahay</a> and <a href="http://twitter.com/bevenky">@bevenky</a>.</p>
+        </div>
+    </footer>
+</body>
+</html>
