@@ -22,6 +22,14 @@ secret_key = string.ascii_uppercase
 
 @app.route("/")
 def index():
+    global domains
+    domains = defaultdict(list)
+    
+    temp_file = open("Urls.txt", "r")
+    for url in sorted(temp_file, key = str.lower):
+        domains[url[:1]].append(url)
+    temp_file.close()
+
     return show_domains("a")
 
 
