@@ -7,33 +7,17 @@ from flask import g
 
 import json
 import string
+from collections import defaultdict
+
 
 app = Flask(__name__)
 app.debug = True
 
-domains = {
-            "a" : ["aa.com", "aka.com", "aa.com", "aka.com", "aa.com", "aka.com"],
-            "b" : ["ba.com", "bka.com"],
-}
+domains = defaultdict(list)
 
 char_set = map(chr, range(97, 123))
 
 secret_key = string.ascii_uppercase
-
-
-DATABASE = 'urls.db'
-
-def connect_db():
-    return sqlite3.connect(DATABASE)
-
-@app.before_request
-def before_request():
-    g.db = connect_db()
-
-@app.teardown_request
-def teardown_request(exception):
-    if hasattr(g, 'db'):
-        g.db.close()
 
 
 @app.route("/")
@@ -57,13 +41,16 @@ def show_domains(alphabet):
 def set_data():
     global secret_key
     global domains
-    if 'data' in request.form and 'auth' in request.form:
-        data = request.form['data']
+    if 'auth' in request.form:
         auth = request.form['auth']
         if auth == secret_key:
-            domains = json.loads(data)
+            domains = defaultdict(list)
+            temp_file = open("Urls.txt", "r")
+            for url in sorted(temp_file, key = str.lower):
+                domains[url[:1]].append(url)
+
+            temp_file.close()
             return "OK"
-    
     return "ERR"
 
 
